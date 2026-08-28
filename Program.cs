@@ -1,13 +1,23 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hola Mario");
-Console.WriteLine("Tengo expeiencia en Genero");
-Console.WriteLine("Estoy aprendiendo C#");
+Console.WriteLine("Ingresa el material:");
 
-string material = "1001";
-string descripcion = "tornillo";
-decimal precio = 12.50m;
+string? material = Console.ReadLine();
 
-Console.WriteLine("=== Maestro de Materiales ===");
-Console.WriteLine($"Material:  {material}");
-Console.WriteLine($"Descripcion: {descripcion}");
-Console.WriteLine($"Precio: {precio}");
+switch (material)
+{
+    case "1001":
+        Console.WriteLine("Tornillo");
+        break;
+
+    case "1002":
+        Console.WriteLine("Tuerca");
+        break;
+
+    case "1003":
+        Console.WriteLine("Arandela");
+        break;
+
+    default:
+        Console.WriteLine("Material no encontrado");
+        break;
+}
