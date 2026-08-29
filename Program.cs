@@ -1,23 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Ingresa el material:");
 
-string? material = Console.ReadLine();
+List<string> materiales = new List<string>{
+    "Tornilos",
+    "Tuerca",
+    "Arandela",
+    "Rondana",
+    "Pija",
+};
 
-switch (material)
+Console.WriteLine("=== Catálogo de materiales ===");
+
+foreach (var material in materiales)
 {
-    case "1001":
-        Console.WriteLine("Tornillo");
-        break;
-
-    case "1002":
-        Console.WriteLine("Tuerca");
-        break;
-
-    case "1003":
-        Console.WriteLine("Arandela");
-        break;
-
-    default:
-        Console.WriteLine("Material no encontrado");
-        break;
+    Console.WriteLine(material);
 }
