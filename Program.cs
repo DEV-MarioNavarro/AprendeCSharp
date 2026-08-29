@@ -1,16 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-List<string> materiales = new List<string>{
-    "Tornilos",
-    "Tuerca",
-    "Arandela",
-    "Rondana",
-    "Pija",
-};
-
-Console.WriteLine("=== Catálogo de materiales ===");
-
-foreach (var material in materiales)
+for (int i = 1; i <= 10; i++)
 {
-    Console.WriteLine(material);
+    Console.WriteLine($"Numero: {i}");
 }
