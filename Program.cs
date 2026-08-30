@@ -1,17 +1,19 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-List<string> materiales = new List<string>
+﻿
+static string ObtenerDescripcion(string codigo)
 {
-"Tornillo",
-"Tuerca",
-"Arandela",
-"Rondana",
-"Pija"
-};
+    switch (codigo)
+    {
+        case "1001":
+            return "Tornillo";
 
-Console.WriteLine("=== Catálogo de Materiales ===");
+        case "1002":
+            return "Tuerca";
 
-foreach (string material in materiales)
-{
-    Console.WriteLine(material);
+        default:
+            return "No encontrado";
+    }
 }
+
+string descripcion = ObtenerDescripcion("1002");
+
+Console.WriteLine(descripcion);
