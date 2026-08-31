@@ -1,19 +1,12 @@
-﻿
-static string ObtenerDescripcion(string codigo)
-{
-    switch (codigo)
-    {
-        case "1001":
-            return "Tornillo";
+﻿using AprendeCSharp;
 
-        case "1002":
-            return "Tuerca";
+Material material = new Material();
 
-        default:
-            return "No encontrado";
-    }
-}
+material.Codigo = "1001";
+material.Descripcion = "Tornillo";
+material.Precio = 12.50m;
 
-string descripcion = ObtenerDescripcion("1002");
+Console.WriteLine(material.Codigo);
+Console.WriteLine(material.Descripcion);
+Console.WriteLine(material.Precio);
 
-Console.WriteLine(descripcion);
