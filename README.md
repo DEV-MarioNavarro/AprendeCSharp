@@ -8,30 +8,30 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 
 ## Temas completados
 
-✅ Variables y tipos de datos
-✅ Operadores
-✅ Estructuras de control
-✅ Métodos
-✅ Clases
-✅ Encapsulación
-✅ Programación Orientada a Objetos (POO)
-✅ Colecciones con List<T>
+- ✅ Variables y tipos de datos.
+- ✅ Operadores
+- ✅ Estructuras de control
+- ✅ Métodos
+- ✅ Clases
+- ✅ Encapsulación
+- ✅ Programación Orientada a Objetos (POO)
+- ✅ Colecciones con List&lt;T&gt;
 
 ## Temas en progreso
 
-🔄 JSON
-🔄 LINQ
-🔄 APIs REST
+- 🔄 JSON
+- 🔄 LINQ
+- 🔄 APIs REST
 
 ## Temas futuros
 
-⏳ Entity Framework Core
-⏳ SQL Server
-⏳ ASP.NET Core
-⏳ Inyección de Dependencias
-⏳ Patrones de Diseño
-⏳ Arquitectura por capas
-⏳ Pruebas unitarias
+- ⏳ Entity Framework Core
+- ⏳ SQL Server
+- ⏳ ASP.NET Core
+- ⏳ Inyección de Dependencias
+- ⏳ Patrones de Diseño
+- ⏳ Arquitectura por capas
+- ⏳ Pruebas unitarias
 
 ## Herramientas utilizadas
 
