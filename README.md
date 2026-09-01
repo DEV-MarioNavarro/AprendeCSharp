@@ -8,7 +8,7 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 
 ## Temas completados
 
-- ✅ Variables y tipos de datos.
+- ✅ Variables y tipos de datos
 - ✅ Operadores
 - ✅ Estructuras de control
 - ✅ Métodos
@@ -17,6 +17,8 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 - ✅ Programación Orientada a Objetos (POO)
 - ✅ Colecciones con List&lt;T&gt;
 - ✅ JSON
+- ✅ Git
+- ✅ GitHub
 
 ## Temas en progreso
 
@@ -25,8 +27,8 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 
 ## Temas futuros
 
-- ⏳ Entity Framework Core
 - ⏳ SQL Server
+- ⏳ Entity Framework Core
 - ⏳ ASP.NET Core
 - ⏳ Inyección de Dependencias
 - ⏳ Patrones de Diseño
