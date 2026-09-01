@@ -11,39 +11,76 @@ class Program
         // Serialiazación de un objeto Material a JSON
         Console.WriteLine("Serialización de un objeto Material a JSON:");
 
-        Material material = new Material
+        Material material1 = new Material
         {
             Codigo = "MAT001",
-            Descripcion = "Material de ejemplo",
+            Descripcion = "Tuercas",
             Precio = 10.5m
         };
 
-        string json = JsonSerializer.Serialize(
-            material,
+        Material material2 = new Material
+        {
+            Codigo = "MAT002",
+            Descripcion = "Pinzas",
+            Precio = 35m
+        };
+
+        Material material3 = new Material
+        {
+            Codigo = "MAT003",
+            Descripcion = "Desarmador",
+            Precio = 22m
+        };
+
+        List<Material> materiales = new List<Material>();
+
+        materiales.Add(material1);
+        materiales.Add(material2);
+        materiales.Add(material3);
+
+        string jsonOutput = JsonSerializer.Serialize(
+            materiales,
             new JsonSerializerOptions
             {
                 WriteIndented = true
             });
 
-        Console.WriteLine($"Material en formato JSON: {json}");
+        Console.WriteLine($"Material en formato JSON: {jsonOutput}");
 
         // Deserialización de JSON a un objeto Material
-        Console.WriteLine("\nDeserialización de JSON a un objeto Material:");
-
         string jsonInput = """
-            {
-            "Codigo": "MAT002",
-            "Descripcion": "Otro material",
-            "Precio": 20.75
-            }
+            [
+              {
+                "Codigo": "MAT101",
+                "Descripcion": "Taladro",
+                "Precio": 150.00
+              },
+              {
+                "Codigo": "MAT102",
+                "Descripcion": "Broca",
+                "Precio": 25.00
+              },
+              {
+                "Codigo": "MAT103",
+                "Descripcion": "Martillo",
+                "Precio": 75.00
+              }
+            ]
             """;
-        Console.WriteLine(jsonInput);
 
-        Material? deserializedMaterial = JsonSerializer.Deserialize<Material>(jsonInput);
-        if (deserializedMaterial != null)
+        Console.WriteLine($"\nDeserialización de JSON a un objeto Material: {jsonInput}");
+
+        List<Material>? materialesDeserializados = 
+            JsonSerializer.Deserialize<List<Material>>(jsonInput);
+
+        if (materialesDeserializados != null)
         {
-            Console.WriteLine($"Material deserializado: {deserializedMaterial.Codigo}, {deserializedMaterial.Descripcion}, {deserializedMaterial.Precio}");
-        }
+            foreach (var material in materialesDeserializados)
+            {
+                Console.WriteLine($"Código: {material.Codigo}, Descripción: {material.Descripcion}, Precio: {material.Precio}");
+            }
+        }   
 
     }
+
 }

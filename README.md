@@ -16,10 +16,10 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 - ✅ Encapsulación
 - ✅ Programación Orientada a Objetos (POO)
 - ✅ Colecciones con List&lt;T&gt;
+- ✅ JSON
 
 ## Temas en progreso
 
-- 🔄 JSON
 - 🔄 LINQ
 - 🔄 APIs REST
 
