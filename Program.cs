@@ -8,9 +8,6 @@ class Program
 {
     static void Main()
     {
-        // Serialiazación de un objeto Material a JSON
-        Console.WriteLine("Serialización de un objeto Material a JSON:");
-
         Material material1 = new Material
         {
             Codigo = "MAT001",
@@ -38,48 +35,44 @@ class Program
         materiales.Add(material2);
         materiales.Add(material3);
 
-        string jsonOutput = JsonSerializer.Serialize(
-            materiales,
-            new JsonSerializerOptions
-            {
-                WriteIndented = true
-            });
+        var materialesFiltrados =
+            materiales.Where(m => m.Precio > 30)
+                      .ToList();
 
-        Console.WriteLine($"Material en formato JSON: {jsonOutput}");
-
-        // Deserialización de JSON a un objeto Material
-        string jsonInput = """
-            [
-              {
-                "Codigo": "MAT101",
-                "Descripcion": "Taladro",
-                "Precio": 150.00
-              },
-              {
-                "Codigo": "MAT102",
-                "Descripcion": "Broca",
-                "Precio": 25.00
-              },
-              {
-                "Codigo": "MAT103",
-                "Descripcion": "Martillo",
-                "Precio": 75.00
-              }
-            ]
-            """;
-
-        Console.WriteLine($"\nDeserialización de JSON a un objeto Material: {jsonInput}");
-
-        List<Material>? materialesDeserializados = 
-            JsonSerializer.Deserialize<List<Material>>(jsonInput);
-
-        if (materialesDeserializados != null)
+        Console.WriteLine(materiales.Count); // Imprime 3
+        foreach (var material in materialesFiltrados)
         {
-            foreach (var material in materialesDeserializados)
-            {
-                Console.WriteLine($"Código: {material.Codigo}, Descripción: {material.Descripcion}, Precio: {material.Precio}");
-            }
-        }   
+            Console.WriteLine(material.Descripcion);
+        }
+
+        // m: representa la lista de materiales
+        // m.Precio > 20: representa la condifición del código del material que se está buscando
+        // al final .ToList() convierte en una lista de materiales que cumplen con la condición
+
+        //List<Material> materialesCaros = 
+        //    materiales.Where(m => 
+        //        m.Precio > 20 &&
+        //        m.Codigo == "MAT003" &&
+        //        m.Descripcion.Contains("Des"))
+        //    .ToList();
+
+        //foreach (Material material in materialesCaros)
+        //{
+        //    Console.WriteLine($"Código: {material.Codigo}, Descripción: {material.Descripcion}, Precio: {material.Precio}");
+        //}
+
+        // m: representa la lista de materiales
+        // m.codigo == "MAT002": representa la condifición del código del material que se está buscando
+
+        //Material? materialEncontrado =
+        //    materiales.FirstOrDefault(m => m.Codigo == "MAT002");
+
+        //if (materialEncontrado != null)
+        //{
+        //    Console.WriteLine(materialEncontrado.Descripcion);
+        //}   
+
+
 
     }
 
