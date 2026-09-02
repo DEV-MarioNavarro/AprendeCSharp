@@ -24,14 +24,14 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 ## Temas en progreso
 
 - 🔄 LINQ intermedio ( Select(), OrderBy(), OrderByDescending(), Any(), Take(), Skip() )
-- 🔄 LINQ avanzado ( GroupBy(), Sum(), Average(), Max(), Min(), Join(), Aggregate(), Proyecciones complejas, Consultas con Entity Framework Core )
+- 🔄 LINQ avanzado ( GroupBy(), Sum(), Average(), Max(), Min(), Join(), Aggregate(), Proyecciones complejas )
 - 🔄 APIs REST
 - 🔄 APIs REST con ASP.NET Core
 
 ## Temas futuros
 
 - ⏳ SQL Server
-- ⏳ Entity Framework Core
+- ⏳ Entity Framework Core ( DBContext, DBSet, Migraciones, Relaciones, LINQ sobre Base de Datos)
 - ⏳ ASP.NET Core
 - ⏳ Inyección de Dependencias
 - ⏳ Patrones de Diseño
