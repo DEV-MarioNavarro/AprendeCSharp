@@ -19,10 +19,11 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 - ✅ JSON
 - ✅ Git
 - ✅ GitHub
+- ✅ LINQ básico
 
 ## Temas en progreso
 
-- 🔄 LINQ
+- 🔄 LINQ intermedio 
 - 🔄 APIs REST
 
 ## Temas futuros
