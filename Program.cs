@@ -30,18 +30,35 @@ List<Material> materiales = new List<Material>()
     }
 };
 
-// selecciona los códigos de los materiales usando LINQ
-var codigos =
-    materiales.Select(m => new { 
-        m.Codigo,
-        m.Descripcion,
-        PrecioConIVA = m.Precio * 1.16m
-    });
+// ordena los materiales por descripción
+var codigos1 =
+    materiales.OrderBy(m => m.Descripcion);
 
-// imprime los códigos de los materiales
-foreach (var codigo in codigos)
+// ordena los materiales por descripción y luego por precio
+var codigos2 =
+    materiales.OrderBy(m => m.Descripcion)
+              .ThenBy(m => m.Precio);
+
+// imprime los códigos de los materiales ordenados por descripción
+foreach (var codigo in codigos1)
 {
-    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio con IVA: {codigo.PrecioConIVA}");
+    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}");
 
 }
 
+// imprime los códigos de los materiales ordenados por descripción y luego por precio
+foreach (var codigo in codigos2)
+{
+    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio: {codigo.Precio}");
+}
+
+var codigos3 = 
+    materiales.Select(m => new { m.Codigo, m.Descripcion, m.Precio })
+              .OrderBy(m => m.Descripcion)
+              .ThenBy(m => m.Precio);
+
+// imprime los códigos de los materiales ordenados por descripción y luego por precio
+foreach (var codigo in codigos3)
+{
+    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio: {codigo.Precio}");
+}
