@@ -26,17 +26,22 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 
 - 🔄 LINQ avanzado ( GroupBy(), Sum(), Average(), Max(), Min(), Join(), Aggregate(), Proyecciones complejas )
 - 🔄 APIs REST
-- 🔄 APIs REST con ASP.NET Core
 
 ## Temas futuros
 
 - ⏳ SQL Server
 - ⏳ Entity Framework Core ( DBContext, DBSet, Migraciones, Relaciones, LINQ sobre Base de Datos)
 - ⏳ ASP.NET Core
+- ⏳ APIs REST con ASP.NET Core
 - ⏳ Inyección de Dependencias
 - ⏳ Patrones de Diseño
 - ⏳ Arquitectura por capas
 - ⏳ Pruebas unitarias
+- ⏳ JWT Authentication
+- ⏳ Swagger / OpenAPI
+- ⏳ Logging
+- ⏳ OpenTelemetry
+- ⏳ Observabilidad
 
 ## Herramientas utilizadas
 
