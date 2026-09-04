@@ -30,16 +30,17 @@ List<Material> materiales = new List<Material>()
     }
 };
 
+// filtra los materiales con precio mayor a 15, ordena por descripción descendente, selecciona solo el código, descripción y precio, y omite los dos primeros resultados
 var primeros =
     materiales.Where(m => m.Precio > 15)
-              .OrderBy(m => m.Descripcion)
+              .OrderByDescending(m => m.Descripcion)
               .Select(m => new
               {
                     m.Codigo,
                     m.Descripcion,
                     m.Precio
               })
-              .Take(2);
+              .Skip(1);
 
 foreach (var material in primeros)
 {
