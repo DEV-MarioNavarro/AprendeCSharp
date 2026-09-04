@@ -30,24 +30,18 @@ List<Material> materiales = new List<Material>()
     }
 };
 
-// verifica si existe un material con el código "M002"
-bool existe =
-    materiales.Any(m => m.Codigo == "M002");
+var primeros =
+    materiales.Where(m => m.Precio > 15)
+              .OrderBy(m => m.Descripcion)
+              .Select(m => new
+              {
+                    m.Codigo,
+                    m.Descripcion,
+                    m.Precio
+              })
+              .Take(2);
 
-if (existe)
+foreach (var material in primeros)
 {
-    Console.WriteLine("El material con código M002 existe en la lista.");
-}else
-    {
-    Console.WriteLine("El material con código M002 no existe en la lista.");
-}
-
-// verifica si existe un material con el código "M004"
-if (materiales.Any(m => m.Codigo == "M004"))
-{
-    Console.WriteLine("El material con código M004 existe en la lista.");
-}
-else
-{
-    Console.WriteLine("El material con código M004 no existe en la lista.");
+    Console.WriteLine($"Código: {material.Codigo}, Descripción: {material.Descripcion}, Precio: {material.Precio}");
 }
