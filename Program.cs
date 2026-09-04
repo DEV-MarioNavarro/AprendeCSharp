@@ -40,17 +40,17 @@ var codigos2 =
               .ThenBy(m => m.Precio);
 
 // imprime los códigos de los materiales ordenados por descripción
-foreach (var codigo in codigos1)
-{
-    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}");
+//foreach (var codigo in codigos1)
+//{
+//    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}");
 
-}
+//}
 
 // imprime los códigos de los materiales ordenados por descripción y luego por precio
-foreach (var codigo in codigos2)
-{
-    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio: {codigo.Precio}");
-}
+//foreach (var codigo in codigos2)
+//{
+//    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio: {codigo.Precio}");
+//}
 
 var codigos3 = 
     materiales.Select(m => new { m.Codigo, m.Descripcion, m.Precio })
@@ -58,7 +58,24 @@ var codigos3 =
               .ThenBy(m => m.Precio);
 
 // imprime los códigos de los materiales ordenados por descripción y luego por precio
-foreach (var codigo in codigos3)
+//foreach (var codigo in codigos3)
+//{
+//    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio: {codigo.Precio}");
+//}
+
+var codigos4 = 
+    materiales
+        .Where(m => m.Precio > 0)
+        .OrderByDescending(m => m.Descripcion)
+        .Select(m => new 
+        { 
+            m.Codigo, 
+            m.Descripcion, 
+            m.Precio 
+        });
+
+// imprime los códigos de los materiales ordenados por descripción y luego por precio
+foreach (var codigo in codigos4)
 {
     Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio: {codigo.Precio}");
 }
