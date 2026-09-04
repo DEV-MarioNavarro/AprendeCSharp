@@ -30,52 +30,24 @@ List<Material> materiales = new List<Material>()
     }
 };
 
-// ordena los materiales por descripción
-var codigos1 =
-    materiales.OrderBy(m => m.Descripcion);
+// verifica si existe un material con el código "M002"
+bool existe =
+    materiales.Any(m => m.Codigo == "M002");
 
-// ordena los materiales por descripción y luego por precio
-var codigos2 =
-    materiales.OrderBy(m => m.Descripcion)
-              .ThenBy(m => m.Precio);
-
-// imprime los códigos de los materiales ordenados por descripción
-//foreach (var codigo in codigos1)
-//{
-//    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}");
-
-//}
-
-// imprime los códigos de los materiales ordenados por descripción y luego por precio
-//foreach (var codigo in codigos2)
-//{
-//    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio: {codigo.Precio}");
-//}
-
-var codigos3 = 
-    materiales.Select(m => new { m.Codigo, m.Descripcion, m.Precio })
-              .OrderBy(m => m.Descripcion)
-              .ThenBy(m => m.Precio);
-
-// imprime los códigos de los materiales ordenados por descripción y luego por precio
-//foreach (var codigo in codigos3)
-//{
-//    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio: {codigo.Precio}");
-//}
-
-var codigos4 = 
-    materiales
-        .Where(m => m.Precio > 0)
-        .OrderByDescending(m => m.Descripcion)
-        .Select(m => new 
-        { 
-            m.Codigo, 
-            m.Descripcion, 
-            m.Precio 
-        });
-
-// imprime los códigos de los materiales ordenados por descripción y luego por precio
-foreach (var codigo in codigos4)
+if (existe)
 {
-    Console.WriteLine($"Código: {codigo.Codigo}, Descripción: {codigo.Descripcion}, Precio: {codigo.Precio}");
+    Console.WriteLine("El material con código M002 existe en la lista.");
+}else
+    {
+    Console.WriteLine("El material con código M002 no existe en la lista.");
+}
+
+// verifica si existe un material con el código "M004"
+if (materiales.Any(m => m.Codigo == "M004"))
+{
+    Console.WriteLine("El material con código M004 existe en la lista.");
+}
+else
+{
+    Console.WriteLine("El material con código M004 no existe en la lista.");
 }
