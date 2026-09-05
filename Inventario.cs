@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AprendeCSharp
 {
-    public class Material
+    public class Inventario
     {
         public string Codigo { get; set; } = string.Empty;
         public string Almacen { get; set; } = string.Empty;
         public string Centro { get; set; } = string.Empty;
-        public string Descripcion { get; set; } = string.Empty;
+        public decimal Existencia { get; set; }
     }
 }

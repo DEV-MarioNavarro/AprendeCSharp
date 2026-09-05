@@ -10,121 +10,154 @@ List<Material> materiales = new List<Material>()
 {
     new Material
     {
-        Codigo = "M001",
-        Descripcion = "Material 1",
-        Precio = 10.5m,
-        Categoria = "Ferretería"
+        Codigo = "1001",
+        Almacen = "QRO",
+        Centro = "C001",
+        Descripcion = "Tornillo"
     },
+
     new Material
     {
-        Codigo = "M002",
-        Descripcion = "Material 2",
-        Precio = 20.0m,
-        Categoria = "Ferretería"
+        Codigo = "1002",
+        Almacen = "QRO",
+        Centro = "C001",
+        Descripcion = "Tuerca"
     },
+
     new Material
     {
-        Codigo = "M003",
-        Descripcion = "Material 3",
-        Precio = 15.75m,
-        Categoria = "Ferretería"
+        Codigo = "1003",
+        Almacen = "MTY",
+        Centro = "C002",
+        Descripcion = "Taladro"
     },
+
     new Material
     {
-        Codigo = "M004",
-        Descripcion = "Material 4",
-        Precio = 5.0m,
-        Categoria = "Herramienta"
-    },
-    new Material
-    {
-        Codigo = "M005",
-        Descripcion = "Material 5",
-        Precio = 30.0m,
-        Categoria = "Herramienta"
-    },
-    new Material
-    {
-        Codigo = "M006",
-        Descripcion = "Material 6",
-        Precio = 25.0m,
-        Categoria = "Ferreteria"
-    },
-    new Material
-    {
-        Codigo = "M007",
-        Descripcion = "Material 7",
-        Precio = 8.0m,
-        Categoria = "Herramienta"
-    },
-    new Material
-    {
-        Codigo = "M008",
-        Descripcion = "Material 8",
-        Precio = 12.0m,
-        Categoria = "Herramienta"
+        Codigo = "1004",
+        Almacen = "MTY",
+        Centro = "C002",
+        Descripcion = "Martillo"
     }
 };
 
-//Por cada categoría:
-//-Tomar los 2 materiales más caros
-//- Calcular el total
-//- Calcular el promedio 
+List<Inventario> inventarios = new List<Inventario>()
+{
+    new Inventario
+    {
+        Codigo = "1001",
+        Almacen = "QRO",
+        Centro = "C001",
+        Existencia = 150
+    },
 
-var reporte =
-    materiales
-        .GroupBy(m => m.Categoria)
-        .Select(grupo => new
+    new Inventario
+    {
+        Codigo = "1002",
+        Almacen = "QRO",
+        Centro = "C001",
+        Existencia = 200
+    },
+
+    new Inventario
+    {
+        Codigo = "1003",
+        Almacen = "MTY",
+        Centro = "C002",
+        Existencia = 50
+    },
+
+    new Inventario
+    {
+        Codigo = "1004",
+        Almacen = "MTY",
+        Centro = "C002",
+        Existencia = 75
+    }
+};
+
+List<Categoria> categorias = new List<Categoria>()
+{
+    new Categoria
+    {
+        Codigo = "1001",
+        Almacen = "QRO",
+        CategoriaNombre = "Ferreteria"
+    },
+
+    new Categoria
+    {
+        Codigo = "1002",
+        Almacen = "QRO",
+        CategoriaNombre = "Ferreteria"
+    },
+
+    new Categoria
+    {
+        Codigo = "1003",
+        Almacen = "MTY",
+        CategoriaNombre = "Herramienta"
+    },
+
+    new Categoria
+    {
+        Codigo = "1004",
+        Almacen = "MTY",
+        CategoriaNombre = "Herramienta"
+    }
+};
+
+var materialInventario =
+    materiales.Join(
+        inventarios,
+        m => new
         {
-            Categoria = grupo.Key,
-
-            Top2 = grupo
-                .OrderByDescending(m => m.Precio)
-                .Take(2),
-
-            Total = grupo
-                .OrderByDescending(m => m.Precio)
-                .Take(2)
-                .Sum(m => m.Precio),
-
-            Promedio = grupo
-                .OrderByDescending(m => m.Precio)
-                .Take(2)
-                .Average(m => m.Precio)
+            m.Codigo,
+            m.Almacen,
+            m.Centro
+        },
+        i => new
+        {
+            i.Codigo,
+            i.Almacen,
+            i.Centro
+        },
+        (m, i) => new
+        {
+            Material = m,
+            Inventario = i
         });
 
-foreach (var categoria in reporte)
+var reporte =
+    materialInventario.Join(
+        categorias,
+        mi => new
+        {
+            mi.Material.Codigo,
+            mi.Material.Almacen
+        },
+        c => new
+        {
+            c.Codigo,
+            c.Almacen
+        },
+        (mi, c) => new
+        {
+            mi.Material.Codigo,
+            mi.Material.Descripcion,
+            Categoria = c.CategoriaNombre,
+            mi.Inventario.Existencia,
+            mi.Material.Centro,
+            mi.Material.Almacen
+        });
+
+foreach (var item in reporte)
 {
     Console.WriteLine(
-        $"Categoria: {categoria.Categoria}");
-
-    foreach (var material in categoria.Top2)
-    {
-        Console.WriteLine(
-            $"{material.Descripcion} - {material.Precio}");
-    }
-
-    Console.WriteLine(
-        $"Total: {categoria.Total}");
-
-    Console.WriteLine(
-        $"Promedio: {categoria.Promedio:F3}");
-
-    Console.WriteLine();
+        $"{item.Codigo} | " +
+        $"{item.Descripcion} | " +
+        $"{item.Categoria} | " +
+        $"{item.Existencia} | " +
+        $"{item.Almacen} | " +
+        $"{item.Centro}");
 }
-
-// Obtén las categorías cuyo promedio de los 2 materiales más caros sea mayor a 20.
-
-var reporte2 =
-    materiales
-        .GroupBy(m => m.Categoria)
-        .Select(grupo => new
-        {
-            Categoria = grupo.Key,
-
-            Promedio = grupo
-                .OrderByDescending(m => m.Precio)
-                .Take(2)
-                .Average(m => m.Precio)
-        })
-        .Where(x => x.Promedio > 20);
