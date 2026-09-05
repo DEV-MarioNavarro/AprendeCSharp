@@ -66,43 +66,14 @@ List<Material> materiales = new List<Material>()
     }
 };
 
-// Obtén por categoría:
-   
-// Solo materiales con precio mayor a 10
-// Ordenados descendente por precio
-// Tomar únicamente los 2 más caros de cada categoría
-// Calcular el precio promedio
-// Mostrar la categoría, cantidad y promedio
+// El precio más alto de los 3 materiales más caros cuyo precio sea mayor a 10.
 
-var reporte =
+var precioMaximo =
     materiales
         .Where(m => m.Precio > 10)
-        .GroupBy(m => m.Categoria)
-        .Select(grupo => new
-        {
-            Categoria = grupo.Key,
+        .OrderByDescending(m => m.Precio)
+        .Take(3)
+        .Max(m => m.Precio);
 
-            Cantidad = grupo
-                .OrderByDescending(m => m.Precio)
-                .Take(2)
-                .Count(),
-
-            Promedio = grupo
-                .OrderByDescending(m => m.Precio)
-                .Take(2)
-                .Average(m => m.Precio)
-        });
-
-foreach (var item in reporte)
-{
-    Console.WriteLine(
-        $"Categoria: {item.Categoria}");
-
-    Console.WriteLine(
-        $"Cantidad: {item.Cantidad}");
-
-    Console.WriteLine(
-        $"Promedio: {item.Promedio:F3}");
-
-    Console.WriteLine();
-}
+Console.WriteLine(
+    $"Precio máximo: {precioMaximo}");
