@@ -66,14 +66,65 @@ List<Material> materiales = new List<Material>()
     }
 };
 
-// El precio más alto de los 3 materiales más caros cuyo precio sea mayor a 10.
+//Por cada categoría:
+//-Tomar los 2 materiales más caros
+//- Calcular el total
+//- Calcular el promedio 
 
-var precioMaximo =
+var reporte =
     materiales
-        .Where(m => m.Precio > 10)
-        .OrderByDescending(m => m.Precio)
-        .Take(3)
-        .Max(m => m.Precio);
+        .GroupBy(m => m.Categoria)
+        .Select(grupo => new
+        {
+            Categoria = grupo.Key,
 
-Console.WriteLine(
-    $"Precio máximo: {precioMaximo}");
+            Top2 = grupo
+                .OrderByDescending(m => m.Precio)
+                .Take(2),
+
+            Total = grupo
+                .OrderByDescending(m => m.Precio)
+                .Take(2)
+                .Sum(m => m.Precio),
+
+            Promedio = grupo
+                .OrderByDescending(m => m.Precio)
+                .Take(2)
+                .Average(m => m.Precio)
+        });
+
+foreach (var categoria in reporte)
+{
+    Console.WriteLine(
+        $"Categoria: {categoria.Categoria}");
+
+    foreach (var material in categoria.Top2)
+    {
+        Console.WriteLine(
+            $"{material.Descripcion} - {material.Precio}");
+    }
+
+    Console.WriteLine(
+        $"Total: {categoria.Total}");
+
+    Console.WriteLine(
+        $"Promedio: {categoria.Promedio:F3}");
+
+    Console.WriteLine();
+}
+
+// Obtén las categorías cuyo promedio de los 2 materiales más caros sea mayor a 20.
+
+var reporte2 =
+    materiales
+        .GroupBy(m => m.Categoria)
+        .Select(grupo => new
+        {
+            Categoria = grupo.Key,
+
+            Promedio = grupo
+                .OrderByDescending(m => m.Precio)
+                .Take(2)
+                .Average(m => m.Precio)
+        })
+        .Where(x => x.Promedio > 20);
