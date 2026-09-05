@@ -30,33 +30,13 @@ List<Material> materiales = new List<Material>()
     }
 };
 
-var total1 =
+// Quieres conocer el precio promedio de los 3 materiales más caros cuyo precio sea mayor a 10.
+var promedio =
     materiales
+        .Where(m => m.Precio > 10)
         .OrderByDescending(m => m.Precio)
         .Take(3)
-        .Sum(m => m.Precio);
-
-Console.WriteLine(total1);
-
-var total2 =
-    materiales
-        .Where(m => m.Descripcion.Contains("Material"))
-        .Sum(m => m.Precio);
-
-Console.WriteLine(total2);
-
-var total3 =
-    materiales
-        .OrderBy(m => m.Descripcion)
-        .Sum(m => m.Precio);
-
-Console.WriteLine(total3);
-
-var top2MasCaros =
-    materiales
-        .OrderByDescending(m => m.Precio)
-        .Take(2)
-        .Sum(m => m.Precio);
+        .Average(m => m.Precio);
 
 Console.WriteLine(
-    $"Total de los 2 materiales más caros: {top2MasCaros}");
+    $"Promedio de los 3 materiales más caros: {promedio:F3}");
