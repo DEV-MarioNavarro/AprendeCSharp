@@ -30,19 +30,23 @@ List<Material> materiales = new List<Material>()
     }
 };
 
-// filtra los materiales con precio mayor a 15, ordena por descripción descendente, selecciona solo el código, descripción y precio, y omite los dos primeros resultados
-var primeros =
-    materiales.Where(m => m.Precio > 15)
-              .OrderByDescending(m => m.Descripcion)
-              .Select(m => new
-              {
-                    m.Codigo,
-                    m.Descripcion,
-                    m.Precio
-              })
-              .Skip(1);
+var barato =
+    materiales.OrderBy(m => m.Precio)
+              .FirstOrDefault();
 
-foreach (var material in primeros)
+var caro =
+    materiales.OrderByDescending(m => m.Precio)
+              .FirstOrDefault();
+
+Console.WriteLine($"Material más barato: {barato?.Descripcion} - Precio: {barato?.Precio}");
+Console.WriteLine($"Material más caro: {caro?.Descripcion} - Precio: {caro?.Precio}");
+
+var materialesCaros =
+    materiales.Where(m => m.Precio > 10)
+              .OrderBy(m => m.Precio)
+              .ToList();
+
+foreach (var material in materialesCaros)
 {
-    Console.WriteLine($"Código: {material.Codigo}, Descripción: {material.Descripcion}, Precio: {material.Precio}");
+    Console.WriteLine($"Material caro: {material.Descripcion} - Precio: {material.Precio}");
 }
