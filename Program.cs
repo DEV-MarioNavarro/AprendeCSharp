@@ -30,23 +30,33 @@ List<Material> materiales = new List<Material>()
     }
 };
 
-var barato =
-    materiales.OrderBy(m => m.Precio)
-              .FirstOrDefault();
+var total1 =
+    materiales
+        .OrderByDescending(m => m.Precio)
+        .Take(3)
+        .Sum(m => m.Precio);
 
-var caro =
-    materiales.OrderByDescending(m => m.Precio)
-              .FirstOrDefault();
+Console.WriteLine(total1);
 
-Console.WriteLine($"Material más barato: {barato?.Descripcion} - Precio: {barato?.Precio}");
-Console.WriteLine($"Material más caro: {caro?.Descripcion} - Precio: {caro?.Precio}");
+var total2 =
+    materiales
+        .Where(m => m.Descripcion.Contains("Material"))
+        .Sum(m => m.Precio);
 
-var materialesCaros =
-    materiales.Where(m => m.Precio > 10)
-              .OrderBy(m => m.Precio)
-              .ToList();
+Console.WriteLine(total2);
 
-foreach (var material in materialesCaros)
-{
-    Console.WriteLine($"Material caro: {material.Descripcion} - Precio: {material.Precio}");
-}
+var total3 =
+    materiales
+        .OrderBy(m => m.Descripcion)
+        .Sum(m => m.Precio);
+
+Console.WriteLine(total3);
+
+var top2MasCaros =
+    materiales
+        .OrderByDescending(m => m.Precio)
+        .Take(2)
+        .Sum(m => m.Precio);
+
+Console.WriteLine(
+    $"Total de los 2 materiales más caros: {top2MasCaros}");
