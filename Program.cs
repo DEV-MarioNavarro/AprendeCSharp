@@ -107,57 +107,47 @@ List<Categoria> categorias = new List<Categoria>()
     }
 };
 
-var materialInventario =
-    materiales.Join(
-        inventarios,
-        m => new
-        {
-            m.Codigo,
-            m.Almacen,
-            m.Centro
-        },
-        i => new
-        {
-            i.Codigo,
-            i.Almacen,
-            i.Centro
-        },
-        (m, i) => new
-        {
-            Material = m,
-            Inventario = i
-        });
+
+// Cuál es el precio más alto de los 3 materiales más caros de cada categoría?
 
 var reporte =
-    materialInventario.Join(
-        categorias,
-        mi => new
+    materiales
+        .Join(
+            inventarios,
+            m => m.Codigo,
+            i => i.Codigo,
+            (m, i) => new
+            {
+                m.Codigo,
+                m.Descripcion,
+                m.Almacen,
+                m.Centro,
+                i.Existencia,
+                Precio = i.Existencia * 10 // Supongamos que el precio es existencia * 10
+            })
+        .Join(categorias,
+            mi => mi.Codigo,
+            c => c.Codigo,
+            (mi, c) => new      // mi es el resultado de la primera unión, c es el resultado de la segunda unión
+            {
+                mi.Codigo,
+                mi.Descripcion,
+                mi.Almacen,
+                mi.Centro,
+                mi.Existencia,
+                mi.Precio,
+                c.CategoriaNombre
+            })
+        .GroupBy(m => m.CategoriaNombre)
+        .Select(grupo => new
         {
-            mi.Material.Codigo,
-            mi.Material.Almacen
-        },
-        c => new
-        {
-            c.Codigo,
-            c.Almacen
-        },
-        (mi, c) => new
-        {
-            mi.Material.Codigo,
-            mi.Material.Descripcion,
-            Categoria = c.CategoriaNombre,
-            mi.Inventario.Existencia,
-            mi.Material.Centro,
-            mi.Material.Almacen
+            Categoria = grupo.Key,
+            PrecioMaximo = grupo.OrderByDescending(m => m.Precio)
+                                .Take(3)
+                                .Max(m => m.Precio)
         });
 
 foreach (var item in reporte)
 {
-    Console.WriteLine(
-        $"{item.Codigo} | " +
-        $"{item.Descripcion} | " +
-        $"{item.Categoria} | " +
-        $"{item.Existencia} | " +
-        $"{item.Almacen} | " +
-        $"{item.Centro}");
+    Console.WriteLine($"Categoría: {item.Categoria}, Precio Máximo de los 3 materiales más caros: {item.PrecioMaximo}");
 }
