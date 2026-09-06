@@ -13,7 +13,8 @@ List<Material> materiales = new List<Material>()
         Codigo = "1001",
         Almacen = "QRO",
         Centro = "C001",
-        Descripcion = "Tornillo"
+        Descripcion = "Tornillo",
+        Precio = 1.5m
     },
 
     new Material
@@ -21,7 +22,8 @@ List<Material> materiales = new List<Material>()
         Codigo = "1002",
         Almacen = "QRO",
         Centro = "C001",
-        Descripcion = "Tuerca"
+        Descripcion = "Tuerca",
+        Precio = 0.5m
     },
 
     new Material
@@ -29,7 +31,8 @@ List<Material> materiales = new List<Material>()
         Codigo = "1003",
         Almacen = "MTY",
         Centro = "C002",
-        Descripcion = "Taladro"
+        Descripcion = "Taladro",
+        Precio = 50m
     },
 
     new Material
@@ -37,7 +40,8 @@ List<Material> materiales = new List<Material>()
         Codigo = "1004",
         Almacen = "MTY",
         Centro = "C002",
-        Descripcion = "Martillo"
+        Descripcion = "Martillo",
+        Precio = 10m
     }
 };
 
@@ -108,63 +112,21 @@ List<Categoria> categorias = new List<Categoria>()
 };
 
 
-//Queremos obtener por categoría:
+//Tomar una colección y convertirla en un único resultado acumulando valores.
+// Aggregate() te permite definir tu propia lógica de acumulación.
 
-//El material más caro.
-//El material más barato.
-//El promedio de los 3 más caros.
+var resultado =
+    materiales.Aggregate(
+        "",
+        (acumulado, material) =>
+            acumulado + material.Descripcion + ", ");
 
-var reporte =
-    materiales
-        .Join(
-            inventarios,
-            m => m.Codigo,
-            i => i.Codigo,
-            (m, i) => new
-            {
-                m.Codigo,
-                m.Descripcion,
-                m.Almacen,
-                m.Centro,
-                i.Existencia,
-                Precio = i.Existencia * 10
-            })
-        .Join(
-            categorias,
-            mi => mi.Codigo,
-            c => c.Codigo,
-            (mi, c) => new
-            {
-                mi.Codigo,
-                mi.Descripcion,
-                mi.Almacen,
-                mi.Centro,
-                mi.Existencia,
-                mi.Precio,
-                c.CategoriaNombre
-            })
-        .GroupBy(m => m.CategoriaNombre)
-        .Select(grupo => new
-        {
-            Categoria = grupo.Key,
+Console.WriteLine(resultado);
 
-            PrecioMaximo =
-                grupo.Max(m => m.Precio),
+var total =
+    materiales.Aggregate(
+        0m,
+        (acumulado, material) =>
+            acumulado + material.Precio);
 
-            PrecioMinimo =
-                grupo.Min(m => m.Precio),
-
-            PromedioTop3 =
-                grupo.OrderByDescending(m => m.Precio)
-                     .Take(3)
-                     .Average(m => m.Precio)
-        });
-
-foreach (var item in reporte)
-{
-    Console.WriteLine($"Categoría: {item.Categoria}");
-    Console.WriteLine($"Máximo: {item.PrecioMaximo}");
-    Console.WriteLine($"Mínimo: {item.PrecioMinimo}");
-    Console.WriteLine($"Promedio Top 3: {item.PromedioTop3:F3}");
-    Console.WriteLine();
-}
+Console.WriteLine(total);

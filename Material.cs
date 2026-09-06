@@ -12,5 +12,7 @@ namespace AprendeCSharp
         public string Almacen { get; set; } = string.Empty;
         public string Centro { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
+
+        public decimal Precio { get; set; }
     }
 }
