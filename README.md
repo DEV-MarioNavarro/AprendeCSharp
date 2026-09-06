@@ -21,11 +21,10 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 - ✅ GitHub
 - ✅ LINQ básico ( Where(), FirstOrDefault(), Count(), ToList() )
 - ✅ LINQ intermedio ( Select(), OrderBy(), OrderByDescending(), Any(), Take(), Skip() )
-- ✅ LINQ avanzado ( GroupBy(), Sum(), Average(), Join(), Proyecciones complejas )
+- ✅ LINQ avanzado ( GroupBy(), Sum(), Average(), Join(), Proyecciones complejas, Max(), Min(), Aggregate() )
 
 ## Temas en progreso
 
-- 🔄 LINQ avanzado ( Max(), Min(), Aggregate() )
 - 🔄 APIs REST
 
 ## Temas futuros
