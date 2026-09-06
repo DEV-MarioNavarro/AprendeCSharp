@@ -108,7 +108,11 @@ List<Categoria> categorias = new List<Categoria>()
 };
 
 
-// Cuál es el precio más alto de los 3 materiales más caros de cada categoría?
+//Queremos obtener por categoría:
+
+//El material más caro.
+//El material más barato.
+//El promedio de los 3 más caros.
 
 var reporte =
     materiales
@@ -123,12 +127,13 @@ var reporte =
                 m.Almacen,
                 m.Centro,
                 i.Existencia,
-                Precio = i.Existencia * 10 // Supongamos que el precio es existencia * 10
+                Precio = i.Existencia * 10
             })
-        .Join(categorias,
+        .Join(
+            categorias,
             mi => mi.Codigo,
             c => c.Codigo,
-            (mi, c) => new      // mi es el resultado de la primera unión, c es el resultado de la segunda unión
+            (mi, c) => new
             {
                 mi.Codigo,
                 mi.Descripcion,
@@ -142,12 +147,24 @@ var reporte =
         .Select(grupo => new
         {
             Categoria = grupo.Key,
-            PrecioMaximo = grupo.OrderByDescending(m => m.Precio)
-                                .Take(3)
-                                .Max(m => m.Precio)
+
+            PrecioMaximo =
+                grupo.Max(m => m.Precio),
+
+            PrecioMinimo =
+                grupo.Min(m => m.Precio),
+
+            PromedioTop3 =
+                grupo.OrderByDescending(m => m.Precio)
+                     .Take(3)
+                     .Average(m => m.Precio)
         });
 
 foreach (var item in reporte)
 {
-    Console.WriteLine($"Categoría: {item.Categoria}, Precio Máximo de los 3 materiales más caros: {item.PrecioMaximo}");
+    Console.WriteLine($"Categoría: {item.Categoria}");
+    Console.WriteLine($"Máximo: {item.PrecioMaximo}");
+    Console.WriteLine($"Mínimo: {item.PrecioMinimo}");
+    Console.WriteLine($"Promedio Top 3: {item.PromedioTop3:F3}");
+    Console.WriteLine();
 }
