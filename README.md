@@ -22,15 +22,18 @@ Fortalecer mis conocimientos en desarrollo de software utilizando C# y el ecosis
 - ✅ LINQ básico ( Where(), FirstOrDefault(), Count(), ToList() )
 - ✅ LINQ intermedio ( Select(), OrderBy(), OrderByDescending(), Any(), Take(), Skip() )
 - ✅ LINQ avanzado ( GroupBy(), Sum(), Average(), Join(), Proyecciones complejas, Max(), Min(), Aggregate() )
+- ✅ APIs REST ( Conceptualización, REST Básico )
 
 ## Temas en progreso
 
-- 🔄 APIs REST
+- 🔄 APIs REST ( HttpClient, Consumir API pública, JSON -> Objetos )
+- 🔄 APIs REST ( Crear API REST en ASP.NET Core )
 
 ## Temas futuros
 
 - ⏳ SQL Server
 - ⏳ Entity Framework Core ( DBContext, DBSet, Migraciones, Relaciones, LINQ sobre Base de Datos)
+- ⏳ API REST conectada a SQL Server 
 - ⏳ ASP.NET Core
 - ⏳ APIs REST con ASP.NET Core
 - ⏳ Inyección de Dependencias
